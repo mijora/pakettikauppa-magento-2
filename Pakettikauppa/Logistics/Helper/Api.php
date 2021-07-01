@@ -97,7 +97,7 @@ class Api extends \Magento\Framework\App\Helper\AbstractHelper
         $client = $this->client;
         $result = [];
         $methods = json_decode($client->listShippingMethods());
-
+        //$this->logger->critical(print_r($methods));
         if (empty($methods)) {
             return $result;
         }
@@ -108,6 +108,7 @@ class Api extends \Magento\Framework\App\Helper\AbstractHelper
 
         $counter = 0;
         foreach ($methods as $method) {
+            //$this->logger->debug(json_encode($method));
             if (count($method->additional_services) > 0) {
                 foreach ($method->additional_services as $service) {
                     if ($service->service_code == '2106') {
