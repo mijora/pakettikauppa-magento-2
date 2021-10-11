@@ -53,13 +53,16 @@ class Homedelivery extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
         $homedelivery = $this->apiHelper->getHomeDelivery();
         if (count($homedelivery)>0) {
             $cart_value = $request->getPackageValueWithDiscount();
-
+            $items = json_decode($this->scopeConfig->getValue('carriers/pakettikauppa/pakettikauppa_carriers', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
             foreach ($homedelivery as $hd) {
+                $enabled = 0;
                 $carrier_code = $this->dataHelper->getCarrierCode($hd->service_provider, $hd->name);
-                if ($carrier_code) {
-                    $enabled = $this->scopeConfig->getValue('carriers/' . $carrier_code . '/active', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-                } else {
-                    $enabled = 0;
+                $service = false;
+                foreach($items as $item){
+                    if ($item->code == $hd->shipping_method_code && $item->enabled == 1 && $item->is_pickup_service == 0){
+                        $enabled = 1;
+                        $service = $item;
+                    }
                 }
                 if ($enabled == 1) {
                     // Check if this shipping method supports the country
@@ -73,8 +76,8 @@ class Homedelivery extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
                     if (property_exists($hd, 'icon')) {
                         $data[$hd->service_provider] = '<img src="' . $hd->icon . '" alt="' . $hd->service_provider . '"/>';
                     }
-                    $db_price =  $this->scopeConfig->getValue('carriers/' . $carrier_code . '/price', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-                    $db_title =  $this->scopeConfig->getValue('carriers/' . $carrier_code . '/title', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+                    $db_price =  $service->price;
+                    $db_title =  $service->name;// $this->scopeConfig->getValue('carriers/' . $carrier_code . '/title', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
                     $conf_price = $this->getConfigData('price');
                     $conf_title = $this->getConfigData('title');
                     if ($db_price == '') {
@@ -89,8 +92,8 @@ class Homedelivery extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
                     }
 
                     // DISCOUNT PRICE
-                    $minimum =  $this->scopeConfig->getValue('carriers/' . $carrier_code . '/cart_price', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-                    $new_price =  $this->scopeConfig->getValue('carriers/' . $carrier_code . '/new_price', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+                    $minimum =  $service->min_cart;
+                    $new_price =  $service->discount_price;
                     if ($cart_value && $minimum && $cart_value >= $minimum) {
                         $price = $new_price;
                     }

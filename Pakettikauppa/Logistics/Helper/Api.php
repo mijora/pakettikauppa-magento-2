@@ -14,13 +14,13 @@ require_once __DIR__ . '/pakettikauppa/SimpleXMLElement.php';
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Pakettikauppa\Client;
-use Pakettikauppa\Shipment;
-use Pakettikauppa\Shipment\AdditionalService;
-use Pakettikauppa\Shipment\Info;
-use Pakettikauppa\Shipment\Parcel;
-use Pakettikauppa\Shipment\Receiver;
-use Pakettikauppa\Shipment\Sender;
+use Pakettikauppa\Logistics\Client;
+use Pakettikauppa\Logistics\Shipment;
+use Pakettikauppa\Logistics\Shipment\AdditionalService;
+use Pakettikauppa\Logistics\Shipment\Info;
+use Pakettikauppa\Logistics\Shipment\Parcel;
+use Pakettikauppa\Logistics\Shipment\Receiver;
+use Pakettikauppa\Logistics\Shipment\Sender;
 use Psr\Log\LoggerInterface;
 
 class Api extends \Magento\Framework\App\Helper\AbstractHelper
@@ -88,6 +88,7 @@ class Api extends \Magento\Framework\App\Helper\AbstractHelper
         $result = $this->client->searchPickupPointsByText($query, implode(', ', $allowed), 10);
         return json_decode($result);
     }
+    
 
     public function getLabel($trackingCode) {
         return $this->client->fetchShippingLabels([$trackingCode]);

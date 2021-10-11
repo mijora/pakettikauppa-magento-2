@@ -1,6 +1,6 @@
 <?php
 
-namespace Pakettikauppa;
+namespace Pakettikauppa\Logistics;
 
 class Client
 {

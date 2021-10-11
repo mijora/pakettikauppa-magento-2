@@ -1,6 +1,6 @@
 <?php
 
-namespace Pakettikauppa\Shipment;
+namespace Pakettikauppa\Logistics\Shipment;
 
 /**
  * Class Parcel

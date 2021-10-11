@@ -1,12 +1,12 @@
 <?php
 
-namespace Pakettikauppa;
+namespace Pakettikauppa\Logistics;
 
-use Pakettikauppa\Shipment\AdditionalService;
-use Pakettikauppa\Shipment\Info;
-use Pakettikauppa\Shipment\Parcel;
-use Pakettikauppa\Shipment\Sender;
-use Pakettikauppa\Shipment\Receiver;
+use Pakettikauppa\Logistics\Shipment\AdditionalService;
+use Pakettikauppa\Logistics\Shipment\Info;
+use Pakettikauppa\Logistics\Shipment\Parcel;
+use Pakettikauppa\Logistics\Shipment\Sender;
+use Pakettikauppa\Logistics\Shipment\Receiver;
 
 /**
  * Class Shipment
