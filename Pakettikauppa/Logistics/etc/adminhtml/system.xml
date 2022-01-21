@@ -42,7 +42,7 @@
           </group>
         </section>
         <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
-            <group id="asendia_asendialähetys" translate="label" type="text" sortOrder="189" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="asendia_asendialahetys" translate="label" type="text" sortOrder="189" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Asendia - Lähetys</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
@@ -64,7 +64,7 @@
                     <validate>validate-number validate-zero-or-greater</validate>
                 </field>
             </group>
-            <group id="asendia_asendiapienilähetys" translate="label" type="text" sortOrder="189" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="asendia_asendiapienilahetys" translate="label" type="text" sortOrder="189" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Asendia - Asendia Pieni Lähetys</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
